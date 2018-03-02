@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-class BrandController extends Controller
+
+class EndUserController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -24,6 +24,6 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('brand');
+        return view('end-user');
     }
 }
