@@ -6,7 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -67,5 +68,54 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function showBrandRegisterForm()
+    {
+        return view('auth.brand-register');
+    }
+
+    public function showPublisherRegisterForm()
+    {
+        return view('auth.publisher-register');
+    }
+
+    public function showEndUserRegisterForm()
+    {
+        return view('auth.end-user-register');
+    }
+
+    public function brandRegister(request $request)
+    {
+        User::create([
+            'name' =>  $request->name,
+            'email' =>  $request->email,
+            'password' => bcrypt( $request->password),
+            'role' =>  $request->role
+        ]);
+        return redirect('brand/login');
+    }
+
+
+    public function publisherRegister(request $request)
+    {
+        User::create([
+            'name' =>  $request->name,
+            'email' =>  $request->email,
+            'password' => bcrypt( $request->password),
+            'role' =>  $request->role
+        ]);
+        return redirect('publisher/login');
+    }
+
+    public function endUserRegister(request $request)
+    {
+        User::create([
+            'name' =>  $request->name,
+            'email' =>  $request->email,
+            'password' => bcrypt( $request->password),
+            'role' =>  $request->role
+        ]);
+        return redirect('end_user/login');
     }
 }
