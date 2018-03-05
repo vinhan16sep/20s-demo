@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getRole(){
+        return $this->role; // this looks for an role column in your users table
+    }
 }

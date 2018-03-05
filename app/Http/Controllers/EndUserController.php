@@ -12,9 +12,15 @@ class EndUserController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:web');
+    public function __construct(){
+        $this->middleware(function($request, $next){
+            if ( Auth::guard('web')->check() && Auth::guard('web')->user()->getRole() == 79 ) {
+                return $next($request);
+            }else{
+                Auth::logout();
+                return redirect()->intended(route('homepage'));
+            }
+        });
     }
 
     /**

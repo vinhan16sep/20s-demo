@@ -12,9 +12,15 @@ class BrandController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:web');
+    public function __construct(){
+        $this->middleware(function($request, $next){
+            if ( Auth::guard('web')->check() && Auth::guard('web')->user()->getRole() == 99 ) {
+                return $next($request);
+            }else{
+                Auth::logout();
+                return redirect()->intended(route('homepage'));
+            }
+        });
     }
 
     /**
@@ -22,8 +28,7 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         return view('brand');
     }
 }

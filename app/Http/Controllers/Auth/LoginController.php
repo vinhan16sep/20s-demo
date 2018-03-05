@@ -34,8 +34,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('guest')->except('logout');
     }
 
@@ -61,11 +60,8 @@ class LoginController extends Controller
         // Attempt to log the user in
         if($this->guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'role' => 99], $request->remember)){
             // Redirect if user logged successful
-            
             return redirect()->intended(route('brand.dashboard'));
         }
-
-
 
         // Throw them back to login form if un-successful
         return redirect()->back()->withInput($request->only('email', 'remember'));
