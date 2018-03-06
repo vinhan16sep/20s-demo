@@ -26,7 +26,7 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'role' => 99])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('Brand')->accessToken;
-            return response()->json(['success' => $success], $this->successStatus);
+            return response()->json(['success' => $success, 'user' => $user], $this->successStatus);
         }
         else{
             return response()->json(['error'=>'Unauthorised'], 401);
@@ -63,17 +63,5 @@ class LoginController extends Controller
 
 
         return response()->json(['success'=>$success], $this->successStatus);
-    }
-
-
-    /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function details()
-    {
-        $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
     }
 }

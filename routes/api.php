@@ -17,15 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('v1')->group(function() {
+    Route::group(array('namespace' => 'Api'), function() {
+        // Brand Login
+        Route::post('brand-login', 'LoginController@brandLogin');
+        Route::post('brand-register', 'LoginController@brandRegister');
 
-Route::post('login', 'Api\UserController@login');
-Route::post('register', 'Api\UserController@register');
-
-
-Route::group(['middleware' => 'auth:api'], function(){
-    Route::post('details', 'Api\UserController@details');
+        Route::middleware('auth:api')->post('detail', 'UserController@detail');
+    });
 });
-
-// Brand Login
-Route::post('brand-login', 'Api\LoginController@brandLogin');
-Route::post('brand-register', 'Api\LoginController@brandRegister');
