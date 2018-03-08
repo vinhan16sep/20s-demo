@@ -121,7 +121,9 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="view_login_brand">
                                     <h3 class="title">For Brand only</h3>
-                                    <form>
+
+                                    {{-- BRAND LOGIN FORM --}}
+                                    {{ Form::open(array('method'=>'post','class'=> '','url' => '', 'id'=>'brand-login')) }}
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                             <label for="input_brand_email">Email</label>
                                             <input type="text" class="form-control" id="input_brand_email" placeholder="yourbrand@20section.com">
@@ -130,16 +132,14 @@
                                             <label for="input_brand_password">Password</label>
                                             <input type="password" class="form-control" id="input_brand_password" placeholder="password">
                                         </div>
-                                    </form>
+                                        <div class="log_in col-md-12 col-sm-12 col-xs-12">
+                                        {{Form::submit('Log in!', array('name'=>'submit', 'class'=>'btn btn-primary'))}}
+                                        </div>
+                                    {{ Form::close() }}
+                                    {{-- END BRAND LOGIN FORM --}}
 
                                     <div class="forgot_password col-md-12 col-sm-12 col-xs-12">
                                         <a href="#">Forgot password?</a>
-                                    </div>
-
-                                    <div class="log_in col-md-12 col-sm-12 col-xs-12">
-                                        <button class="btn btn-primary" type="submit">
-                                            Log in!
-                                        </button>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="view_login_client">
