@@ -29,7 +29,7 @@ class LoginController extends Controller
             return response()->json(['success' => $success, 'user' => $user], $this->successStatus);
         }
         else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+            return response()->json(['error'=>'Unauthorised'], 200);
         }
     }
 
@@ -64,4 +64,54 @@ class LoginController extends Controller
 
         return response()->json(['success'=>$success], $this->successStatus);
     }
+
+    /**
+     *
+     * Publisher
+     *
+     */
+    public function publisherLogin(){
+
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'role' => 89])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('Publisher')->accessToken;
+            return response()->json(['success' => $success, 'user' => $user], $this->successStatus);
+        }
+        else{
+            return response()->json(['error'=>'Unauthorised'], 200);
+        }
+    }
+
+    /**
+     * Register api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publisherRegister(Request $request){
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required',
+            'c_password' => 'required|same:password'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $success =  false;
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $input['role'] = 89;
+        unset($input['c_password']);
+        if($user = User::create($input)){
+            $success =  true;
+        }
+        
+        // $success['token'] =  $user->createToken('Brand')->accessToken;
+        
+
+        return response()->json(['success'=>$success], $this->successStatus);
+    }
+    
 }

@@ -124,6 +124,7 @@
 
                                     {{-- BRAND LOGIN FORM --}}
                                     {{ Form::open(array('method'=>'post','class'=> '','url' => '', 'id'=>'brand-login')) }}
+                                    <span class="error_brand_login"></span>
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                             <label for="input_brand_email">Email</label>
                                             <input type="text" class="form-control" id="input_brand_email" placeholder="yourbrand@20section.com">
@@ -145,16 +146,23 @@
                                 <div role="tabpanel" class="tab-pane fade" id="view_login_client">
                                     <h3 class="title">For Client only</h3>
                                     <div id="client_login">
-                                        <form>
+                                        {{-- PUBLISHER LOGIN FORM --}}
+                                        {{ Form::open(array('method'=>'post','class'=> '','url' => '', 'id'=>'publisher-login')) }}
+                                        <span class="error_client_login"></span>
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label for="input_client_email">Email</label>
                                                 <input type="text" class="form-control" id="input_client_email" placeholder="yourclient@20section.com">
+
                                             </div>
                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label for="input_client_password">Password</label>
                                                 <input type="password" class="form-control" id="input_client_password" placeholder="password">
                                             </div>
-                                        </form>
+                                            <div class="log_in col-md-12 col-sm-12 col-xs-12">
+                                            {{Form::submit('Log in!', array('name'=>'submit', 'class'=>'btn btn-primary'))}}
+                                            </div>
+                                        {{ Form::close() }}
+                                        {{-- END PUBLISHER LOGIN FORM --}}
 
                                         <div class="sign_up col-md-12 col-sm-12 col-xs-12">
                                             <p>
@@ -166,54 +174,55 @@
                                             <a href="#">Forgot password?</a>
                                         </div>
 
-                                        <div class="log_in col-md-12 col-sm-12 col-xs-12">
+                                        {{-- <div class="log_in col-md-12 col-sm-12 col-xs-12">
                                             <button class="btn btn-primary" type="submit">
                                                 Log in!
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <div id="client_signup">
-                                        <form>
+                                        {{ Form::open(array('method'=>'post','class'=> '','url' => '', 'id'=>'publisher-register')) }}
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                                 <label for="input_client_firstName">First Name (*)</label>
-                                                <input type="text" class="form-control" id="input_client_firstName" placeholder="First Name">
+                                                <input type="text" class="form-control" name="input_client_firstName" id="input_client_firstName" placeholder="First Name">
+                                                <span class="error_firstName"></span>
                                             </div>
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label for="input_client_lastName">First Name (*)</label>
-                                                <input type="text" class="form-control" id="input_client_lastName" placeholder="Last Name">
+                                                <label for="input_client_lastName">Last Name (*)</label>
+                                                <input type="text" class="form-control" name="input_client_lastName" id="input_client_lastName" placeholder="Last Name">
+                                                <span class="error_lastName"></span>
                                             </div>
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                                 <label for="input_client_email_signup">Email</label>
-                                                <input type="email" class="form-control" id="input_client_email_signup" placeholder="youremail">
-                                            </div>
-                                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label for="input_client_password_signup">Email</label>
-                                                <input type="password" class="form-control" id="input_client_password_signup" placeholder="password">
+                                                <input type="email" class="form-control" name="input_client_email_signup" id="input_client_email_signup" placeholder="youremail">
+                                                <span class="error_email"></span>
                                             </div>
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                                 <label for="input_client_phone_signup">Phone number</label>
-                                                <input type="tel" class="form-control" id="input_client_phone_signup" placeholder="091 234 5678">
+                                                <input type="tel" class="form-control" name="input_client_phone_signup" id="input_client_phone_signup" placeholder="091 234 5678">
+                                                <span class="error_phone"></span>
                                             </div>
                                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label for="input_client_fbacc_signup">Your Facebook Account</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon" id="basic-addon3">facebook.com/</span>
-                                                    <input type="text" class="form-control" id="input_client_fbacc_signup" placeholder="your facebook account">
-                                                </div>
+                                                <label for="input_client_password_signup">Password</label>
+                                                <input type="password" class="form-control" name="input_client_password_signup" id="input_client_password_signup" placeholder="password">
+                                                <span class="error_password"></span>
                                             </div>
-                                        </form>
+                                            
+                                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                                <label for="input_client_confirm_password_signup">Confirm Password</label>
+                                                <input type="password" class="form-control" name="input_client_confirm_password_signup" id="input_client_confirm_password_signup" placeholder="confirm password">
+                                                <span class="error_confirm_password"></span>
+                                            </div>
+                                            <div class="log_in col-md-12 col-sm-12 col-xs-12">
+                                            {{Form::submit('Register!', array('name'=>'submit', 'class'=>'btn btn-primary btn-submit-register'))}}
+                                            </div>
+                                        {{ Form::close() }}
 
                                         <div class="sign_up col-md-12 col-sm-12 col-xs-12">
                                             <p>
                                                 Having an account. <a href="javascript:void(0);" id="btn_login">Log in here</a>
                                             </p>
-                                        </div>
-
-                                        <div class="sign_up col-md-12 col-sm-12 col-xs-12">
-                                            <button class="btn btn-primary" type="submit">
-                                                Sign up!
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
