@@ -23,6 +23,10 @@ Route::prefix('v1')->group(function() {
         Route::post('brand-login', 'LoginController@brandLogin');
         Route::post('brand-register', 'LoginController@brandRegister');
 
+        /* Publisher Login */
+        Route::post('publisher-login', 'LoginController@publisherLogin');
+        Route::post('publisher-register', 'LoginController@publisherRegister');
+
         Route::middleware('auth:api')->post('detail', 'UserController@detail');
     });
 });
