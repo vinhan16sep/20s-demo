@@ -48,11 +48,14 @@ Route::prefix('end_user')->group(function(){
     Route::post('/register', 'Auth\RegisterController@endUserRegister')->name('end_user.register.submit');
 });
 
-
-Route::prefix('20s-admin')->group(function(){
-    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+Route::group(['prefix' => '20s-admin'], function () {
+    Route::group(['namespace' => 'admin'], function() {
+        Route::get('/login', 'LoginController@showLoginForm');
+        Route::post('/login', 'LoginController@postLogin')->name('admin.login');
+        Route::get('/', function() {
+            return 'Dashboard';
+        });
+    });
 });
 
 
