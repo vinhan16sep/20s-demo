@@ -8,9 +8,11 @@
                 <div class="card-header">Login</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('admin.login') }}">
                         @csrf
-
+                        @if(Session::has('message'))
+                            <p class="alert alert-info">{{ Session::get('message') }}</p>
+                        @endif
                         <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
 
@@ -66,4 +68,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    setTimeout(function(){
+        $('.alert').slideUp();
+    }, 2000);
+</script>
 @endsection
