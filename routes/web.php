@@ -50,11 +50,18 @@ Route::prefix('end_user')->group(function(){
 
 Route::group(['prefix' => '20s-admin'], function () {
     Route::group(['namespace' => 'admin'], function() {
+        /* Login */
         Route::get('/login', 'LoginController@showLoginForm');
         Route::post('/login', 'LoginController@postLogin')->name('admin.login');
-        Route::get('/', function() {
-            return 'Dashboard';
-        });
+
+        /* Register */
+        Route::get('/register', 'LoginController@showRegisterForm');
+        Route::post('/register', 'LoginController@postRegister')->name('admin.register');
+
+        /* Logout */
+        Route::get('logout', 'LoginController@logout');
+
+        Route::get('/', 'DashboardController@index');
     });
 });
 
