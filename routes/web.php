@@ -62,7 +62,8 @@ Route::group(['prefix' => '20s-admin'], function () {
         Route::get('logout', 'LoginController@logout');
 
         /* Change password */
-        Route::get('password/change/{token}', 'LoginController@showResetForm')->name('admin.password.change')->middleware('auth:admin');;
+        Route::get('password/change', 'LoginController@showChangeForm')->middleware('auth:admin');
+        Route::post('password/change', 'LoginController@changePassword')->name('admin.password.change')->middleware('auth:admin');
 
         Route::get('/', 'DashboardController@index');
     });
