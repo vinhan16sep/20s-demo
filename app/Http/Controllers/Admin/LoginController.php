@@ -68,4 +68,11 @@ class LoginController extends Controller
         Auth::guard('admin')->logout();
         return redirect('20s-admin');
     }
+
+    public function showResetForm(Request $request, $token = null)
+    {
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
+    }
 }
